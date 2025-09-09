@@ -12,6 +12,21 @@ public abstract class AbstractReportGenerator implements ReportGenerator {
 
     protected String formatJobSession(JobSession session) {
         Duration duration = session.getDuration();
+
+        return String.format("%s (%s) - Duration: %d seconds - %s",
+                session.getJobName(),
+                session.getJobId(),
+                duration.getSeconds(),
+                computeStatus(duration));
+    }
+
+    protected List<String> formatSessions(List<JobSession> sessions) {
+        return sessions.stream()
+                .map(this::formatJobSession)
+                .toList();
+    }
+
+    private static String computeStatus(Duration duration) {
         String status;
         if (duration.compareTo(ERROR_THRESHOLD) > 0) {
             status = "ERROR";
@@ -20,18 +35,7 @@ public abstract class AbstractReportGenerator implements ReportGenerator {
         } else {
             status = "OK";
         }
-
-        return String.format("%s (%s) - Duration: %d seconds - %s",
-                session.getJobName(),
-                session.getJobId(),
-                duration.getSeconds(),
-                status);
-    }
-
-    protected List<String> formatSessions(List<JobSession> sessions) {
-        return sessions.stream()
-                .map(this::formatJobSession)
-                .toList();
+        return status;
     }
 }
 

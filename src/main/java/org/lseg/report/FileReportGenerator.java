@@ -1,6 +1,8 @@
 package org.lseg.report;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.lseg.model.JobSession;
 
@@ -10,10 +12,11 @@ import java.nio.file.Path;
 import java.util.List;
 
 @Slf4j
-@RequiredArgsConstructor
+@Setter
+@AllArgsConstructor
 public class FileReportGenerator extends AbstractReportGenerator {
 
-    private final Path outputFile;
+    private Path outputFile;
 
     @Override
     public void generateReport(List<JobSession> sessions) {
