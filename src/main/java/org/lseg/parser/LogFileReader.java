@@ -11,7 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LogFileReader {
 
-    private final LogParserStrategy parser;
+    private final LogParser parser;
 
     public List<LogEntry> read(Path filePath) throws IOException {
         List<String> lines = Files.readAllLines(filePath);

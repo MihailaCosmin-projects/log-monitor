@@ -6,10 +6,9 @@ import org.lseg.model.LogEventType;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
-public class CsvLogParser implements LogParserStrategy {
+public class CsvLogParser implements LogParser {
 
     private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("HH:mm:ss");
 
