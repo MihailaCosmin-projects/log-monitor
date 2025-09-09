@@ -7,8 +7,12 @@ import java.util.List;
 
 public abstract class AbstractReportGenerator implements ReportGenerator {
 
-    protected static final Duration WARNING_THRESHOLD = Duration.ofMinutes(5);
-    protected static final Duration ERROR_THRESHOLD = Duration.ofMinutes(10);
+    private static final Duration WARNING_THRESHOLD = Duration.ofMinutes(5);
+    private static final Duration ERROR_THRESHOLD = Duration.ofMinutes(10);
+
+    public static final String ERROR = "ERROR";
+    public static final String WARNING = "WARNING";
+    public static final String OK = "OK";
 
     protected String formatJobSession(JobSession session) {
         Duration duration = session.getDuration();
@@ -27,15 +31,13 @@ public abstract class AbstractReportGenerator implements ReportGenerator {
     }
 
     private static String computeStatus(Duration duration) {
-        String status;
         if (duration.compareTo(ERROR_THRESHOLD) > 0) {
-            status = "ERROR";
+            return ERROR;
         } else if (duration.compareTo(WARNING_THRESHOLD) > 0) {
-            status = "WARNING";
+            return WARNING;
         } else {
-            status = "OK";
+            return OK;
         }
-        return status;
     }
 }
 
